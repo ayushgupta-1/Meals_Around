@@ -1,30 +1,39 @@
-import { mocks } from "./mock";
-import camelize from "camelize";
-export const restaurantsRequest = (location = "37.7749295,-122.4194155") => {
-  return new Promise((resolve, reject) => {
-    const mock = mocks[location];
-    if (!mock) {
-      reject("not found");
-    }
-    resolve(mock);
-  });
-};
-const restaurantsTransform = ({ results = [] }) => {
-  const mappedResults = results.map((restaurant) => {
-    return {
-      ...restaurant,
-      isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,
-      isClosedTemporarily: restaurant.business_status === "CLOSED_TEMPORARILY",
-    };
-  });
+import React, { useState, createContext, useEffect, useMemo } from "react";
 
-  return camelize(mappedResults);
+import {
+  restaurantsRequest,
+  restaurantsTransform,
+} from "./restaurants.service";
+
+export const RestaurantsContext = createContext();
+
+export const RestaurantsContextProvider = ({ children }) => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const retrieveRestaurants = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      restaurantsRequest()
+        .then(restaurantsTransform)
+        .then((results) => {
+          setIsLoading(false);
+          setRestaurants(results);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          setError(err);
+        });
+    }, 2000);
+  };
+  useEffect(() => {
+    retrieveRestaurants();
+  }, []);
+
+  return (
+    <RestaurantsContext.Provider value={{ restaurants, isLoading, error }}>
+      {children}
+    </RestaurantsContext.Provider>
+  );
 };
-// restaurantsRequest()
-//   .then(restaurantsTransform)
-//   .then((transformedResponse) => {
-//     console.log(transformedResponse);
-//   })
-//   .catch((err) => {
-//     console.log("error");
-//   });
