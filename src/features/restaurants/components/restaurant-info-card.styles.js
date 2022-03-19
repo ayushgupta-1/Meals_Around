@@ -9,13 +9,13 @@ export const Icon = styled.Image`
 export const RestaurantCard = styled(Card)`
   background-color: ${(props) => props.theme.colors.bg.primary};
   margin-bottom: ${(props) => props.theme.space[3]};
-  border-radius: 8px;
+  border-radius: 14px;
 `;
 
 export const RestaurantCardCover = styled(Card.Cover)`
   background-color: ${(props) => props.theme.colors.bg.primary};
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
+  border-top-right-radius: 14px;
+  border-top-left-radius: 14px;
 `;
 
 export const Address = styled.Text`
