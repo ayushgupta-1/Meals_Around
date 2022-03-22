@@ -31,7 +31,7 @@ const firebaseConfig = {
 // }
 
 const firebaseApp = initializeApp(firebaseConfig);
-const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp);
 
 export default function App() {
   const [oswaldLoaded] = useOswald({ Oswald_400Regular });
