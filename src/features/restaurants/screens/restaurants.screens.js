@@ -11,6 +11,8 @@ import { FavouritesBar } from "../../../components/favourites/favourites-bar.com
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 
+import { FadeInView } from "../../../components/animations/fade.animation";
+
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
 `;
@@ -53,12 +55,14 @@ export const RestaurantsScreen = ({ navigation }) => {
                 })
               }
             >
-              <RestaurantInfoCard restaurant={item} />
+              <FadeInView>
+                <RestaurantInfoCard restaurant={item} />
+              </FadeInView>
             </TouchableOpacity>
           );
         }}
         keyExtractor={(item) => item.name}
-        contentContainerStyle={{ paddingHorizontal: 16 }}
+        contentContainerStyle={{ paddingHorizontal: 12 }}
       />
     </SafeArea>
   );

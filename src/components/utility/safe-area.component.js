@@ -6,3 +6,9 @@ export const SafeArea = styled(SafeAreaView)`
   ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
   background-color: ${(props) => props.theme.colors.bg.primary};
 `;
+
+export const SafeAreaFav = styled(SafeAreaView)`
+  flex: 1;
+  margin-top: 12px;
+  background-color: ${(props) => props.theme.colors.bg.primary};
+`;
