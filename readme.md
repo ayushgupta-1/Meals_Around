@@ -4,7 +4,7 @@ a food delivery application
 
 ## Getting Started
 
-A food delivery application made with React Native as frontend and firebase firestore as backend and stripe for payments
+An application made with React Native as frontend and firebase firestore as backend and stripe for payments
 
 ## Overview
 
